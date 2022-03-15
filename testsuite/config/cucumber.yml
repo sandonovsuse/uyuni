@@ -32,6 +32,7 @@ retail: --tags @scope_retail
 configuration_channels: --tags @scope_configuration_channels
 content_staging: --tags @scope_content_staging
 proxy: --tags @scope_proxy
+containerized_proxy: --tags @scope_containerized_proxy
 traditional_client: --tags @scope_traditional_client
 xmlrpc: --tags @scope_xmlrpc
 power_management: --tags @scope_power_management

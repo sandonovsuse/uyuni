@@ -422,16 +422,8 @@ When(/^I enter the hostname of "([^"]*)" as "([^"]*)"$/) do |host, hostname|
 end
 
 When(/^I select the hostname of "([^"]*)" from "([^"]*)"$/) do |host, hostname|
-  case host
-  when 'proxy'
-    # don't select anything if not in the list
-    next if $proxy.nil?
-    step %(I select "#{$proxy.full_hostname}" from "#{hostname}")
-  when 'sle_minion'
-    step %(I select "#{$minion.full_hostname}" from "#{hostname}")
-  when 'build_host'
-    step %(I select "#{$build_host.full_hostname}" from "#{hostname}")
-  end
+  system_name = get_system_name(host)
+  step %(I select "#{system_name}" from "#{hostname}") unless host.include?('proxy') && $proxy.nil?
 end
 
 When(/^I follow this "([^"]*)" link$/) do |host|
@@ -1006,15 +998,15 @@ end
 When(/^I visit "([^"]*)" endpoint of this "([^"]*)"$/) do |service, host|
   node = get_target(host)
   system_name = get_system_name(host)
-  port, text = case service
-               when 'Prometheus' then [9090, 'graph']
-               when 'Prometheus node exporter' then [9100, 'Node Exporter']
-               when 'Prometheus apache exporter' then [9117, 'Apache Exporter']
-               when 'Prometheus postgres exporter' then [9187, 'Postgres Exporter']
-               else raise "Unknown port for service #{service}"
-               end
-  _output, code = node.run("curl -s http://#{system_name}:#{port} | grep -i '#{text}'")
-  raise unless code.zero?
+  port, protocol, path, text = case service
+                               when 'Proxy' then [443, 'https', '/pub/', 'Index of /pub']
+                               when 'Prometheus' then [9090, 'http', '', 'graph']
+                               when 'Prometheus node exporter' then [9100, 'http', '', 'Node Exporter']
+                               when 'Prometheus apache exporter' then [9117, 'http', '', 'Apache Exporter']
+                               when 'Prometheus postgres exporter' then [9187, 'http', '', 'Postgres Exporter']
+                               else raise "Unknown port for service #{service}"
+                               end
+  node.run_until_ok("curl -s -k #{protocol}://#{system_name}:#{port}#{path} | grep -i '#{text}'")
 end
 
 When(/^I select the next maintenance window$/) do

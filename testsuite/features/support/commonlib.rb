@@ -226,3 +226,7 @@ def get_variable_from_conf_file(host, file_path, variable_name)
   raise "Reading #{variable_name} from file on #{host} #{file_path} failed" unless return_code.zero?
   variable_value.strip!
 end
+
+def escape_regex(text)
+  text.gsub(%r{([$.*\[/^])}) { |match| "\\#{match}" }
+end
