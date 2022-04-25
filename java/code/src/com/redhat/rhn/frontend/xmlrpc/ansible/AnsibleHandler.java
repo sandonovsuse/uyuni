@@ -210,7 +210,7 @@ public class AnsibleHandler extends BaseHandler {
      * @xmlrpc.param #session_key()
      * @xmlrpc.param #param_desc("int", "controlNodeId", "id of ansible control node server")
      * @xmlrpc.returntype
-     * #array_begin()
+     * #return_array_begin()
      * $AnsiblePathSerializer
      * #array_end()
      */
@@ -256,7 +256,6 @@ public class AnsibleHandler extends BaseHandler {
      *
      * @xmlrpc.doc Create ansible path
      * @xmlrpc.param #session_key()
-     * @xmlrpc.param #param_desc("int", "pathId", "path id")
      * @xmlrpc.param
      *  #struct_begin("props")
      *      #prop_desc("string", "type", "The ansible path type: 'inventory' or 'playbook'")
