@@ -304,7 +304,7 @@ public class ServerGroupHandler extends BaseHandler {
      * system groups) Caller must be an organization administrator.
      * @xmlrpc.param #session_key()
      * @xmlrpc.returntype
-     *      #reurn_array_begin()
+     *      #return_array_begin()
      *          $ManagedServerGroupSerializer
      *      #array_end()
      */
