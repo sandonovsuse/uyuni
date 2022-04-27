@@ -29,15 +29,15 @@ import com.suse.manager.api.SerializedApiResponse;
  *     #prop_desc("string", "friendly_name", "Friendly name of the product")
  *     #prop_desc("string", "arch", "Architecture")
  *     #prop_desc("string", "status", "'available', 'unavailable' or 'installed'")
- *     #array_begin()
+ *     #return_array_begin()
  *       $MgrSyncChannelDtoSerializer
  *     #array_end()
- *     #array_begin()
+ *     #return_array_begin()
  *       #struct_begin("extension product")
  *         #prop_desc("string", "friendly_name", "Friendly name of extension product")
  *         #prop_desc("string", "arch", "Architecture")
  *         #prop_desc("string", "status", "'available', 'unavailable' or 'installed'")
- *         #array_begin()
+ *         #return_array_begin()
  *           $MgrSyncChannelDtoSerializer
  *         #array_end()
  *       #struct_end()
