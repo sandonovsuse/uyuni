@@ -1188,7 +1188,7 @@ public class ChannelSoftwareHandler extends BaseHandler {
      * Set globally subscribable attribute for given channel.
      * @param loggedInUser The current user
      * @param channelLabel The label for the channel to change
-     * @param subscribable The boolean value to set globally subscribable to.
+     * @param value The boolean value to set globally subscribable to.
      * @return Returns 1 if successful, exception otherwise
      * @throws FaultException A FaultException is thrown if:
      *   - The sessionkey is invalid
